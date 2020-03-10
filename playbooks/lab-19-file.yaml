@@ -1,0 +1,23 @@
+---
+ - hosts: planetexpress
+
+   tasks:
+     - name: "Create directory where Space Station documents will reside"
+       become_user: root
+       become: true
+       file:
+    # below is host variable 
+        path: /home/{{ ansible_user }}/station_docs/ 
+        state: directory
+#below this is a host variable (this means it is mapped in an inventory file) 
+        owner: "{{ ansible_user }}"    
+# below host variable
+        group: "{{ ansible_user }}"
+        mode: "0755"
+
+     - name: "Create directory where Space Station documents will reside"
+       copy:
+        # the var "ansible_user" is a host variablen
+        # ansible_date_time.date is defined by gather_facts
+        dest: "/home/{{ ansible_user }}/station_docs/navdata-{{ ansible_date_time.date }}.txt"
+        content: "Earth\nMars\nSaturn\nEuropa"

@@ -1,0 +1,18 @@
+---
+ - name: do API lookup natively 
+   hosts: localhost 
+   gather_facts: yes
+
+   vars:
+     urltofind: "http://api.open-notify.org/astros.json"
+
+   tasks:
+     - name: Check that a page returns a status 200 and fail if the word AWESOME is not in the page contents
+       uri:
+         url: "{{ urltofind }}"
+       register: results
+
+     - name: Show the results from API
+       debug:
+               var: item.name
+       loop: "{{ results.json.people }}" 

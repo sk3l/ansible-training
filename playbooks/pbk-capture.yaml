@@ -1,0 +1,23 @@
+---
+- name: Copying content from controller to hosts
+  hosts: planetexpress
+  gather_facts: yes # default is yes
+
+  vars:
+      imagechecksum: 0xDEADBEEF
+  tasks:
+    - name: Copy a file from controller to remote hosts 
+      copy:
+          dest: ~/     # home directory on hosts
+          src: ~/ans/files/moveme.txt
+      register: results
+    # Ansible is not for printing to screen
+    # HOWEVER we must print to screen to pick through the JSON returned to modules
+    - name: show results value
+      debug:
+          var: results
+
+    - name: FAIL IF INVALID CHECKSUM
+      fail:
+          msg: "CHECKSUM FAILURE !!!"
+      when: results.checksum != imagechecksum 

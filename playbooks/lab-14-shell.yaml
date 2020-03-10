@@ -1,0 +1,13 @@
+---
+- name: Playbook for testing shell tasks 
+  hosts: planetexpress # <-- this is the GROUP from our inventory file
+  gather_facts: yes # we need to discuss gather_facts! controls running setup.py
+
+  tasks:
+          - name: Make a directory 
+            file:
+                    path: ~/output/    
+                    state: directory
+  
+          - name: use shell module with wildcarding
+            shell: echo $HOME >> ~/output/path.txt

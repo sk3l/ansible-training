@@ -1,0 +1,10 @@
+---
+- name: Yet another copy exercise 
+  hosts: planetexpress
+  gather_facts: yes # default is yes
+
+  tasks:
+    - name: Parameterize the task 
+      copy:
+        content: "backed-up-config" 
+        dest: "~/backedupconfig-{{ ansible_date_time.epoch }}.txt"     # home directory on hosts
