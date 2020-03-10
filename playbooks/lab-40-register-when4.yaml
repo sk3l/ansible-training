@@ -1,0 +1,19 @@
+---
+- name: Extra variables
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+          bool_var: True
+
+  tasks:
+          - name: given bool_var = True
+            debug:
+                    msg: "It would appear as if bool_var was given a value of TRUE"
+            when: bool_var|bool
+
+
+          - name: given bool_var = False
+            debug:
+                    msg: "DO NOT PANIC!"
+            when: not bool_var|bool

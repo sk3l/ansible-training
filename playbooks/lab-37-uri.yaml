@@ -1,0 +1,20 @@
+---
+ - name: A playbook to run python API scripts
+   hosts: localhost 
+   gather_facts: yes
+
+
+   tasks:
+     - name: Copy a script to remote host and execute it 
+       script: ~/ans/scripts/nasalookup.py
+       args:
+          executable: /usr/bin/python3
+       register: results   
+
+     - name: show the JSON produced by the script
+       debug:
+               var: results.stdout
+
+     - name: Show the astros in space
+       debug:
+               msg: "Astros in space - {{ results.stdout.split(\"'\")[1] }}, {{ results.stdout.split(\"'\")[3] }}, {{ results.stdout.split(\"'\")[5] }}"
