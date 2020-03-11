@@ -1,0 +1,21 @@
+---
+- name: Using a role
+  gather_facts: yes
+
+  hosts: allvendors
+
+  vars_files:
+    - ~/switch.creds
+
+
+  roles:
+    - juniper.junos
+
+  tasks:
+    - name: run the juniper_junos_facts.py from juniper.junos/library/
+      juniper_junos_facts:
+      register: results
+
+    - name: display results
+      debug:
+        var: results
