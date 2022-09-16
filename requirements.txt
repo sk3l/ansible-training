@@ -9,5 +9,5 @@ osc-lib==1.7.0
 oslo.config==4.11.0
 oslo.i18n==3.17.0
 oslo.serialization==2.20.0
-oslo.utils==3.33.0
+oslo.utils==4.10.1
 shade==1.28.0
